@@ -2,9 +2,7 @@ class Sorter {
   constructor() {
     // your implementation
     this.array = [];
-    this.comparator = function (a, b) {
-      return a - b;
-    };
+    this.comparator = (a, b) => a - b;
   }
 
   add(element) {
@@ -29,14 +27,17 @@ class Sorter {
 
   sort(indices) {
     // your implementation
-    indices.sort();
-    var tempArray=[];
-    for (var i = 0; i < indices.length; i++){
-      tempArray.push(this.array[indices[i]]);
+    const sortedArr = [];
+    const sortedIndices = indices.sort((a, b) => a - b);
+
+    for (let i = 0, len = sortedIndices.length; i < len; i++) {
+      sortedArr.push(this.array[sortedIndices[i]]);
     }
-    tempArray.sort(this.comparator);
-    for (var i = 0; i < indices.length; i++) {
-      this.array[indices[i]] = tempArray.shift();
+
+    sortedArr.sort(this.comparator);
+
+    for (let i = 0, length = sortedIndices.length; i < length; i++) {
+      this.array[sortedIndices[i]] = sortedArr.shift();
     }
   }
 
